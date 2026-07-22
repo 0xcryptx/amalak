@@ -1,0 +1,65 @@
+AMAL AL KHALEEJ (AMALAK) — BRAND BOARD REFERENCE
+=====================================
+
+BRAND NAME
+----------
+Amal Al Khaleej (AMALAK)
+Interior design & contracting — Dubai, UAE
+
+
+COLOR PALETTE
+-------------
+#606060 — charcoal grey (body text, secondary UI, structure)
+#F2F2F2 — off-white / light grey (page background, light sections)
+#C00000 — signal red (primary accent, CTAs, highlights — carried over from the existing brand mark)
+#DDD9C3 — warm khaki / stone (secondary accent, warm contrast band, card fills)
+
+
+DERIVED NEUTRALS
+----------------
+(tints/shades of the four brand colours above, for large fields — not new brand colours)
+#1A1A1A — near-black, derived from #606060, for dark sections / footer
+#8C8C8C — lightened #606060, for muted/tertiary text
+#FFFFFF — paired with #F2F2F2 for card surfaces
+#EDE8D8 — slightly deeper #DDD9C3, for section bands
+
+
+FONTS
+-----
+Primary display / headline font:
+  Fraunces (modern serif with sharp, architectural detailing)
+
+Secondary / body font:
+  Inter
+
+Font usage:
+  Use Fraunces for headlines, hero titles, and section titles — gives the
+  brand a confident, design-led feel without tipping into decorative/luxury.
+  Use Inter for body copy, navigation, buttons, forms, captions and UI text.
+
+
+FONT FALLBACK STACKS
+--------------------
+For Fraunces:
+  font-family: "Fraunces", "Georgia", "Times New Roman", serif;
+
+For Inter:
+  font-family: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+
+
+DESIGN STYLE
+------------
+Style:        Modern interior design & contracting studio
+Mood:         Confident, precise, structural, warm-neutral, professional
+UI details:   Sharp/soft-square corners (not overly rounded), generous
+              whitespace, strong grid alignment, red used sparingly as a
+              precision accent (underlines, numerals, CTA buttons, icons),
+              khaki used for warm contrast bands and card fills
+Avoid:        Overly playful shapes, neon colours, cluttered layouts,
+              anything that reads as generic stock-template design
+
+Visual references:
+  - Clean architectural photography with strong horizontal/vertical lines
+  - Grid-based portfolio presentation
+  - Minimal, confident typography hierarchy
+  - Red used the way a red pen or blueprint stamp is used: sparing, precise
