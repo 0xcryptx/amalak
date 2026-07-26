@@ -547,7 +547,6 @@ h1, h2, h3, h4 {
   gap: clamp(2.5rem, 6vw, 4.5rem);
   animation: clients-scroll 26s linear infinite;
 }
-.clients-marquee:hover .clients-track { animation-play-state: paused; }
 .clients-item {
   flex: 0 0 auto;
   height: 42px;
