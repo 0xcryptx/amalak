@@ -650,8 +650,8 @@ h1, h2, h3, h4 {
   border-radius: 8px;
   background: var(--off);
   color: var(--text);
-  resize: vertical;
 }
+.field textarea { resize: none; }
 .field input:focus, .field textarea:focus, .field select:focus {
   outline: none;
   border-color: var(--red);
