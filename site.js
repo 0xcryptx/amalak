@@ -148,9 +148,9 @@
       });
     });
 
-    lbClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", function (e) {
-      if (e.target === lightbox) closeLightbox();
+      if (e.target === lbImg) return; /* clicking the photo itself keeps it open */
+      closeLightbox();
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
