@@ -89,6 +89,72 @@
         card.hidden = !match;
       });
     });
+
+    /* Click-to-enlarge lightbox for the full portfolio grid */
+    var lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+    lightbox.hidden = true;
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.innerHTML =
+      '<figure class="lightbox__figure">' +
+      '<button type="button" class="lightbox__close" aria-label="Close">&times;</button>' +
+      '<img class="lightbox__img" src="" alt="" />' +
+      '<figcaption class="lightbox__caption">' +
+      '<span class="lightbox__tag"></span>' +
+      '<h3 class="lightbox__title"></h3>' +
+      "</figcaption>" +
+      "</figure>";
+    document.body.appendChild(lightbox);
+
+    var lbImg = lightbox.querySelector(".lightbox__img");
+    var lbTag = lightbox.querySelector(".lightbox__tag");
+    var lbTitle = lightbox.querySelector(".lightbox__title");
+    var lbClose = lightbox.querySelector(".lightbox__close");
+    var lastFocused = null;
+
+    function openLightbox(card) {
+      var img = card.querySelector("img");
+      var tag = card.querySelector(".portfolio-card__tag");
+      var title = card.querySelector(".portfolio-card__label h3");
+      if (!img) return;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || "";
+      lbTag.textContent = tag ? tag.textContent : "";
+      lbTitle.textContent = title ? title.textContent : "";
+      lastFocused = document.activeElement;
+      lightbox.hidden = false;
+      body.classList.add("lightbox-open");
+      lbClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      body.classList.remove("lightbox-open");
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    }
+
+    cards.forEach(function (card) {
+      if (card.tagName === "A") return; /* teaser cards keep their link behavior */
+      card.classList.add("portfolio-card--clickable");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.addEventListener("click", function () { openLightbox(card); });
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(card);
+        }
+      });
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
+    });
   }
 
   /* Footer year */
