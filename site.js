@@ -90,7 +90,10 @@
       });
     });
 
-    /* Click-to-enlarge lightbox for the full portfolio grid */
+    /* Click-to-enlarge gallery lightbox for the full portfolio grid.
+       Each card represents a whole project; PORTFOLIO_GALLERIES (loaded via
+       gallery-data.js) supplies every photo for that project so the modal
+       can page through them instead of showing just the card's cover shot. */
     var lightbox = document.createElement("div");
     lightbox.className = "lightbox";
     lightbox.hidden = true;
@@ -99,10 +102,14 @@
     lightbox.innerHTML =
       '<figure class="lightbox__figure">' +
       '<button type="button" class="lightbox__close" aria-label="Close">&times;</button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">&#8249;</button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">&#8250;</button>' +
       '<img class="lightbox__img" src="" alt="" />' +
       '<figcaption class="lightbox__caption">' +
       '<span class="lightbox__tag"></span>' +
       '<h3 class="lightbox__title"></h3>' +
+      '<p class="lightbox__subcaption"></p>' +
+      '<p class="lightbox__counter"></p>' +
       "</figcaption>" +
       "</figure>";
     document.body.appendChild(lightbox);
@@ -110,18 +117,68 @@
     var lbImg = lightbox.querySelector(".lightbox__img");
     var lbTag = lightbox.querySelector(".lightbox__tag");
     var lbTitle = lightbox.querySelector(".lightbox__title");
+    var lbSubcaption = lightbox.querySelector(".lightbox__subcaption");
+    var lbCounter = lightbox.querySelector(".lightbox__counter");
     var lbClose = lightbox.querySelector(".lightbox__close");
+    var lbPrev = lightbox.querySelector(".lightbox__nav--prev");
+    var lbNext = lightbox.querySelector(".lightbox__nav--next");
     var lastFocused = null;
 
+    var galleryImages = [];
+    var galleryIndex = 0;
+    var galleryTag = "";
+    var galleryTitle = "";
+
+    function preload(src) {
+      if (!src) return;
+      var im = new Image();
+      im.src = src;
+    }
+
+    function renderSlide() {
+      var total = galleryImages.length;
+      var current = galleryImages[galleryIndex];
+      if (!current) return;
+      lbImg.src = current.src;
+      lbImg.alt = current.alt || "";
+      lbTag.textContent = galleryTag;
+      lbTitle.textContent = galleryTitle;
+      lbSubcaption.textContent = current.caption || "";
+      lbSubcaption.hidden = !current.caption;
+      lbCounter.textContent = total > 1 ? galleryIndex + 1 + " / " + total : "";
+      lightbox.classList.toggle("lightbox--single", total <= 1);
+      if (total > 1) {
+        preload(galleryImages[(galleryIndex + 1) % total].src);
+        preload(galleryImages[(galleryIndex - 1 + total) % total].src);
+      }
+    }
+
+    function showRelative(delta) {
+      var total = galleryImages.length;
+      if (total <= 1) return;
+      galleryIndex = (galleryIndex + delta + total) % total;
+      renderSlide();
+    }
+
     function openLightbox(card) {
-      var img = card.querySelector("img");
       var tag = card.querySelector(".portfolio-card__tag");
       var title = card.querySelector(".portfolio-card__label h3");
-      if (!img) return;
-      lbImg.src = img.currentSrc || img.src;
-      lbImg.alt = img.alt || "";
-      lbTag.textContent = tag ? tag.textContent : "";
-      lbTitle.textContent = title ? title.textContent : "";
+      var slug = card.getAttribute("data-project");
+      var gallery = slug && window.PORTFOLIO_GALLERIES ? window.PORTFOLIO_GALLERIES[slug] : null;
+
+      galleryTag = tag ? tag.textContent : "";
+      if (gallery && gallery.images && gallery.images.length) {
+        galleryImages = gallery.images;
+        galleryTitle = gallery.title || (title ? title.textContent : "");
+      } else {
+        var img = card.querySelector("img");
+        if (!img) return;
+        galleryImages = [{ src: img.currentSrc || img.src, alt: img.alt || "" }];
+        galleryTitle = title ? title.textContent : "";
+      }
+      galleryIndex = 0;
+      renderSlide();
+
       lastFocused = document.activeElement;
       lightbox.hidden = false;
       body.classList.add("lightbox-open");
@@ -148,12 +205,28 @@
       });
     });
 
+    lbPrev.addEventListener("click", function (e) {
+      e.stopPropagation();
+      showRelative(-1);
+    });
+    lbNext.addEventListener("click", function (e) {
+      e.stopPropagation();
+      showRelative(1);
+    });
+    lbClose.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeLightbox();
+    });
+
     lightbox.addEventListener("click", function (e) {
       if (e.target === lbImg) return; /* clicking the photo itself keeps it open */
       closeLightbox();
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
+      if (lightbox.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showRelative(-1);
+      if (e.key === "ArrowRight") showRelative(1);
     });
   }
 
