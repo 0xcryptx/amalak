@@ -100,10 +100,10 @@
     lightbox.setAttribute("role", "dialog");
     lightbox.setAttribute("aria-modal", "true");
     lightbox.innerHTML =
-      '<button type="button" class="lightbox__close" aria-label="Close">&times;</button>' +
-      '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">&#8249;</button>' +
-      '<button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">&#8250;</button>' +
       '<figure class="lightbox__figure">' +
+      '<button type="button" class="lightbox__close" aria-label="Close">&times;</button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>' +
       '<img class="lightbox__img" src="" alt="" />' +
       '<figcaption class="lightbox__caption">' +
       '<span class="lightbox__tag"></span>' +
