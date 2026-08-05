@@ -614,33 +614,32 @@ h1, h2, h3, h4 {
 .lightbox__subcaption { margin-top: 0.3rem; font-size: 0.88rem; color: rgba(255, 255, 255, 0.7); }
 .lightbox__counter { margin-top: 0.35rem; font-size: 0.78rem; color: rgba(255, 255, 255, 0.55); font-variant-numeric: tabular-nums; }
 .lightbox--single .lightbox__counter { display: none; }
-/* Close/prev/next are positioned against .lightbox__figure (the image
+/* Close button matches the janatravel lightbox exactly: a plain glyph
+   (no circle/border) pinned to the overlay's corner — not the image —
+   that rotates and switches to the brand accent color on hover. */
+.lightbox__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.875rem;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+.lightbox__close:hover { color: var(--red); transform: rotate(90deg); }
+.lightbox__close:focus { outline: none; }
+.lightbox__close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.7); outline-offset: 4px; }
+
+/* Prev/next stay positioned against .lightbox__figure (the image
    itself), offset far enough out (>= the button's own size, plus a gap)
    that they never overlap the photo — but since the figure shrink-wraps
    to whatever size the current image actually renders at, the buttons
    stay visually attached to it instead of stranded out at the viewport
    edges when a photo is narrower than the modal's max width. */
-.lightbox__close {
-  position: absolute;
-  top: -3.75rem;
-  right: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--white);
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background-color 0.2s var(--ease);
-  z-index: 4;
-}
-.lightbox__close:hover { background: rgba(255, 255, 255, 0.18); }
-.lightbox__close:focus { outline: none; }
-.lightbox__close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.7); outline-offset: 3px; }
 .lightbox__nav {
   position: absolute;
   top: 50%;
@@ -667,7 +666,7 @@ h1, h2, h3, h4 {
 .lightbox--single .lightbox__nav { display: none; }
 body.lightbox-open { overflow: hidden; }
 @media (max-width: 700px) {
-  .lightbox__close { top: -3.25rem; right: 0; width: 2.25rem; height: 2.25rem; }
+  .lightbox__close { top: 0.75rem; right: 1rem; font-size: 2.1rem; }
   .lightbox__nav { width: 2.35rem; height: 2.35rem; }
   .lightbox__nav svg { width: 1.1rem; height: 1.1rem; }
   .lightbox__nav--prev { left: -0.15rem; }
