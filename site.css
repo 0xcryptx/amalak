@@ -639,6 +639,8 @@ h1, h2, h3, h4 {
   z-index: 4;
 }
 .lightbox__close:hover { background: rgba(255, 255, 255, 0.18); }
+.lightbox__close:focus { outline: none; }
+.lightbox__close:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.7); outline-offset: 3px; }
 .lightbox__nav {
   position: absolute;
   top: 50%;
@@ -658,6 +660,8 @@ h1, h2, h3, h4 {
 }
 .lightbox__nav svg { width: 1.35rem; height: 1.35rem; display: block; }
 .lightbox__nav:hover { background: rgba(255, 255, 255, 0.18); }
+.lightbox__nav:focus { outline: none; }
+.lightbox__nav:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.7); outline-offset: 3px; }
 .lightbox__nav--prev { left: -4rem; }
 .lightbox__nav--next { right: -4rem; }
 .lightbox--single .lightbox__nav { display: none; }
