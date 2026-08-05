@@ -1,12 +1,13 @@
 /* Portfolio gallery data — one entry per project, images in card order. */
 window.PORTFOLIO_GALLERIES = {
   'juma-villa': {
-    title: 'Juma Private Villa',
+    title: 'Private Villa',
     images: [
-      { src: '/assets/portfolio/juma-villa.jpeg', alt: 'Juma Private Villa entrance hall', caption: '' },
-      { src: '/assets/portfolio/juma-villa-foyer.jpeg', alt: 'Juma Private Villa entrance foyer', caption: 'Entrance Foyer' },
-      { src: '/assets/portfolio/juma-villa-bedroom.jpeg', alt: 'Juma Private Villa bedroom lounge', caption: 'Bedroom Lounge' },
-      { src: '/assets/portfolio/juma-villa-bathroom.jpeg', alt: 'Juma Private Villa bathroom', caption: 'Bathroom' },
+      { src: '/assets/portfolio/juma-villa.jpeg', alt: 'Private Villa entrance hall', caption: '' },
+      { src: '/assets/portfolio/villa-majlis-lounge.jpeg', alt: 'Private Villa curved majlis lounge', caption: 'Majlis Lounge' },
+      { src: '/assets/portfolio/juma-villa-foyer.jpeg', alt: 'Private Villa entrance foyer', caption: 'Entrance Foyer' },
+      { src: '/assets/portfolio/juma-villa-bedroom.jpeg', alt: 'Private Villa bedroom lounge', caption: 'Bedroom Lounge' },
+      { src: '/assets/portfolio/juma-villa-bathroom.jpeg', alt: 'Private Villa bathroom', caption: 'Bathroom' },
     ]
   },
   'falcon-group': {
