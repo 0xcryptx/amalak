@@ -97,7 +97,11 @@
             </div>
           </div>
 
-          <form class="form reveal" action="mailto:info@amalak.ae" method="post" enctype="text/plain">
+          <form class="form reveal" id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="8deb9a54-cc15-4d5e-a7b5-70cf30904077" />
+            <input type="hidden" name="subject" value="New quotation request from amalak.ae" />
+            <input type="hidden" name="from_name" value="Amal Al Khaleej Website" />
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
             <div class="form-intro">
               <h2>Request a quotation</h2>
               <p>Share a few details about your project and we'll get back to you with a personalized quote.</p>
@@ -175,6 +179,12 @@
             </div>
             <button type="submit" class="btn btn--primary">Request My Quotation</button>
             <p class="form-note">We typically respond with a detailed quote within 24 hours.</p>
+            <p class="form-error" id="formError" hidden>Something went wrong sending your request. Please try again, or reach us directly at <a href="tel:+971551787397">+971 55 178 7397</a> or <a href="mailto:info@amalak.ae">info@amalak.ae</a>.</p>
+            <div class="form-success" id="formSuccess">
+              <div class="form-success__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <h2>Thank you!</h2>
+              <p>Your quotation request has been received. Our team will review your project details and get back to you within 24 hours.</p>
+            </div>
           </form>
         </div>
       </section>
@@ -237,5 +247,6 @@
     <script src="/site.js?v=1" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@27.0.0/dist/js/intlTelInput.min.js"></script>
     <script src="/contact/phone-input.js" defer></script>
+    <script src="/contact/form-submit.js" defer></script>
   </body>
 </html>

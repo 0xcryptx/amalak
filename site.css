@@ -823,6 +823,43 @@ body.lightbox-open { overflow: hidden; }
 .form-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: -0.5rem; }
 .form-hint { margin: 0; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.4; }
 
+.form-error {
+  font-size: 0.86rem;
+  color: var(--red);
+  background: rgba(192, 0, 0, 0.06);
+  border: 1px solid rgba(192, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-top: -0.5rem;
+}
+.form-error a { color: inherit; text-decoration: underline; }
+
+/* Success state: swap the whole form for a confirmation message */
+.form-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+.form-success__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: var(--khaki-deep);
+  color: var(--red);
+  display: grid;
+  place-items: center;
+}
+.form-success__icon svg { width: 1.6rem; height: 1.6rem; }
+.form-success h2 { font-size: 1.4rem; margin-bottom: 0.6rem; }
+.form-success p { color: var(--ink-soft); max-width: 26rem; margin: 0 auto; }
+
+.form.is-submitted > .form-intro,
+.form.is-submitted > .form-row,
+.form.is-submitted > .field,
+.form.is-submitted > button[type="submit"],
+.form.is-submitted > .form-note,
+.form.is-submitted > .form-error {
+  display: none;
+}
+.form.is-submitted > .form-success { display: block; }
+
 /* intl-tel-input (country + dial code) — Amalak theme */
 .form .field--phone { position: relative; z-index: 8; }
 .form .iti {
