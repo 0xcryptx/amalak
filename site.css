@@ -579,7 +579,7 @@ h1, h2, h3, h4 {
 .lightbox[hidden] { display: none; }
 .lightbox__figure {
   position: relative;
-  max-width: min(90vw, 1100px);
+  max-width: min(80vw, 1100px);
   max-height: 88vh;
   margin: 0;
   display: flex;
@@ -614,10 +614,14 @@ h1, h2, h3, h4 {
 .lightbox__subcaption { margin-top: 0.3rem; font-size: 0.88rem; color: rgba(255, 255, 255, 0.7); }
 .lightbox__counter { margin-top: 0.35rem; font-size: 0.78rem; color: rgba(255, 255, 255, 0.55); font-variant-numeric: tabular-nums; }
 .lightbox--single .lightbox__counter { display: none; }
+/* Close/prev/next are positioned against the full-screen overlay (fixed
+   offsets from the viewport edge), not against the image itself — same
+   approach as the janatravel lightbox — so they float in the backdrop
+   instead of sitting on top of the photo regardless of its aspect ratio. */
 .lightbox__close {
   position: absolute;
-  top: -3rem;
-  right: -0.25rem;
+  top: 1.25rem;
+  right: 1.5rem;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -630,6 +634,7 @@ h1, h2, h3, h4 {
   display: grid;
   place-items: center;
   transition: background-color 0.2s var(--ease);
+  z-index: 4;
 }
 .lightbox__close:hover { background: rgba(255, 255, 255, 0.18); }
 .lightbox__nav {
@@ -648,18 +653,18 @@ h1, h2, h3, h4 {
   display: grid;
   place-items: center;
   transition: background-color 0.2s var(--ease);
-  z-index: 3;
+  z-index: 4;
 }
 .lightbox__nav:hover { background: rgba(255, 255, 255, 0.18); }
-.lightbox__nav--prev { left: -1.25rem; }
-.lightbox__nav--next { right: -1.25rem; }
+.lightbox__nav--prev { left: 1.5rem; }
+.lightbox__nav--next { right: 1.5rem; }
 .lightbox--single .lightbox__nav { display: none; }
 body.lightbox-open { overflow: hidden; }
-@media (max-width: 560px) {
-  .lightbox__close { top: -2.75rem; right: 0; width: 2.25rem; height: 2.25rem; }
+@media (max-width: 700px) {
+  .lightbox__close { top: 0.75rem; right: 0.75rem; width: 2.25rem; height: 2.25rem; }
   .lightbox__nav { width: 2.35rem; height: 2.35rem; font-size: 1.5rem; }
-  .lightbox__nav--prev { left: -0.35rem; }
-  .lightbox__nav--next { right: -0.35rem; }
+  .lightbox__nav--prev { left: 0.5rem; }
+  .lightbox__nav--next { right: 0.5rem; }
 }
 
 /* ============================================================
