@@ -5,6 +5,8 @@
   const submitBtn = form.querySelector('button[type="submit"]');
   const errorEl = document.getElementById("formError");
   const submitBtnLabel = submitBtn ? submitBtn.textContent : "";
+  const againBtn = document.getElementById("submitAnotherBtn");
+  let againTimer = null;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -28,6 +30,13 @@
       .then(function (result) {
         if (result.ok && result.data && result.data.success) {
           form.classList.add("is-submitted");
+          if (againBtn) {
+            againBtn.hidden = true;
+            clearTimeout(againTimer);
+            againTimer = setTimeout(function () {
+              againBtn.hidden = false;
+            }, 3000);
+          }
         } else {
           throw new Error((result.data && result.data.message) || "Submission failed");
         }
@@ -40,4 +49,19 @@
         }
       });
   });
+
+  if (againBtn) {
+    againBtn.addEventListener("click", function () {
+      clearTimeout(againTimer);
+      form.reset();
+      form.classList.remove("is-submitted");
+      againBtn.hidden = true;
+      if (errorEl) errorEl.hidden = true;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtnLabel;
+      }
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 })();
