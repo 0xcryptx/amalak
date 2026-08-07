@@ -849,8 +849,7 @@ body.lightbox-open { overflow: hidden; }
 .form-success__icon svg { width: 1.6rem; height: 1.6rem; }
 .form-success h2 { font-size: 1.4rem; margin-bottom: 0.6rem; }
 .form-success p { color: var(--ink-soft); max-width: 26rem; margin: 0 auto; }
-.form-success__again { margin-top: 1.75rem; animation: lightbox-in 0.3s var(--ease); }
-.form-success__again[hidden] { display: none; }
+.form-success__countdown { margin-top: 1.5rem; font-size: 0.82rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
 .form.is-submitted > .form-intro,
 .form.is-submitted > .form-row,

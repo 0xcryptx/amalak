@@ -5,8 +5,43 @@
   const submitBtn = form.querySelector('button[type="submit"]');
   const errorEl = document.getElementById("formError");
   const submitBtnLabel = submitBtn ? submitBtn.textContent : "";
-  const againBtn = document.getElementById("submitAnotherBtn");
-  let againTimer = null;
+  const countdownEl = document.getElementById("successCountdown");
+  let countdownInterval = null;
+
+  const RESET_SECONDS = 3;
+
+  function resetToEditable() {
+    clearInterval(countdownInterval);
+    if (countdownEl) countdownEl.textContent = "";
+    form.reset();
+    form.classList.remove("is-submitted");
+    if (errorEl) errorEl.hidden = true;
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitBtnLabel;
+    }
+  }
+
+  function startResetCountdown() {
+    clearInterval(countdownInterval);
+    let secondsLeft = RESET_SECONDS;
+
+    function tick() {
+      if (!countdownEl) return;
+      countdownEl.textContent =
+        "This form will reset for a new request in " + secondsLeft + "s…";
+    }
+
+    tick();
+    countdownInterval = setInterval(function () {
+      secondsLeft -= 1;
+      if (secondsLeft <= 0) {
+        resetToEditable();
+      } else {
+        tick();
+      }
+    }, 1000);
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -30,13 +65,7 @@
       .then(function (result) {
         if (result.ok && result.data && result.data.success) {
           form.classList.add("is-submitted");
-          if (againBtn) {
-            againBtn.hidden = true;
-            clearTimeout(againTimer);
-            againTimer = setTimeout(function () {
-              againBtn.hidden = false;
-            }, 3000);
-          }
+          startResetCountdown();
         } else {
           throw new Error((result.data && result.data.message) || "Submission failed");
         }
@@ -49,19 +78,4 @@
         }
       });
   });
-
-  if (againBtn) {
-    againBtn.addEventListener("click", function () {
-      clearTimeout(againTimer);
-      form.reset();
-      form.classList.remove("is-submitted");
-      againBtn.hidden = true;
-      if (errorEl) errorEl.hidden = true;
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitBtnLabel;
-      }
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
 })();
